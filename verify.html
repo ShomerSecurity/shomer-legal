@@ -60,11 +60,10 @@ footer a{color:var(--accent2);text-decoration:none}
 <h2>Level 1 — See it in 60 seconds</h2>
 <div class="level"><span class="tag">Anyone can do this</span>
 <ol>
-<li>Open Gmail with Shomer installed.</li>
-<li>Press <code>F12</code> to open Developer Tools, and click the <strong>Network</strong> tab.</li>
-<li>Open an email so Shomer analyzes it.</li>
-<li>In the filter box, type <code>onrender</code> (Shomer's backend address).</li>
-<li>Click any request, then open its <strong>Payload</strong> (or <strong>Request</strong>) tab.</li>
+<li>Open <code>chrome://extensions</code>, find <strong>Shomer</strong>, and click its <strong>service worker</strong> link (enable Developer mode if you don't see it). A Developer Tools window opens — this is where Shomer's checks actually run, so it's where the requests appear.</li>
+<li>In that window, click the <strong>Network</strong> tab and type <code>onrender</code> in the filter box.</li>
+<li>Switch to Gmail and open an email so Shomer analyzes it (or click <strong>Analyze Email</strong>).</li>
+<li>Click any request, then open its <strong>Payload</strong> tab.</li>
 </ol>
 <p><strong>You'll see</strong> a tiny body like <code>{"url":"..."}</code>, <code>{"domain":"..."}</code>, or <code>{"file_hash":"...","filename":".pdf"}</code>. <strong>You won't see</strong> your subject, body, the sender, or the attachment's contents. Search the request for a word you know is in the email — it isn't there.</p>
 </div>
@@ -73,7 +72,7 @@ footer a{color:var(--accent2);text-decoration:none}
 <div class="level"><span class="tag">The strongest proof</span>
 <ol>
 <li>Open Shomer's <strong>Settings</strong> and turn on <strong>Offline Mode</strong>.</li>
-<li>Open Developer Tools → <strong>Network</strong>, filter for <code>onrender</code>.</li>
+<li>In the <strong>service worker</strong> Network tab (see Level 1), filter for <code>onrender</code>.</li>
 <li>Open several emails, click links, and open attachments.</li>
 </ol>
 <p><strong>You'll see nothing</strong> — zero requests. In Offline Mode, Shomer makes no network calls at all, not even a warm-up ping, and runs entirely on the local engine. With the switch off, the door is simply closed.</p>
@@ -82,17 +81,6 @@ footer a{color:var(--accent2);text-decoration:none}
 <h2>Level 3 — Capture everything</h2>
 <div class="level"><span class="tag">For the thorough</span>
 <p>For a complete, tamper-evident record of every byte the extension sends, use an HTTPS-intercepting proxy such as <strong>mitmproxy</strong>, <strong>Fiddler</strong>, or <strong>Charles Proxy</strong>. These sit between your computer and the internet and log all traffic — so you can confirm, and even screenshot for others, exactly what Shomer transmits. This is the same method security researchers use to audit extensions. You'll see the same five request types described above, and nothing else.</p>
-</div>
-
-<h2>Level 4 — Read the code</h2>
-<div class="level"><span class="tag">For developers</span>
-<p>Shomer's analysis logic ships as readable JavaScript. Open <code>background.js</code> and search for <code>fetch(</code> — the function that makes network requests. You'll find exactly five, and can read each payload:</p>
-<ul>
-<li><code>{ url: stripUrlForReputation(url) }</code> — a stripped link</li>
-<li><code>{ domain }</code> — the sender's domain</li>
-<li><code>{ file_hash, filename: safeFileExt(filename) }</code> — a hash and an extension</li>
-</ul>
-<p>The helper <code>stripUrlForReputation()</code> removes the query string and fragment before a link is sent. <code>safeFileExt()</code> returns only the extension, never the filename. Files are read from Gmail's own servers and hashed <strong>on your device</strong> with the browser's built-in <code>crypto.subtle</code> — the bytes are never uploaded.</p>
 </div>
 
 <h2>Questions?</h2>
