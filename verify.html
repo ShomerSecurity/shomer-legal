@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify It Yourself — Shomer</title>
+<style>
+:root{--bg:#0a0e1a;--surface:#141b2e;--surface2:#1c2540;--border:#2a3550;--text:#e8ecf5;--text2:#a9b3cc;--text3:#6b7694;--accent:#5b8cff;--accent2:#7aa2ff;--safe:#2fd584}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.7;background-image:radial-gradient(circle at 20% 10%,rgba(91,140,255,.06),transparent 40%)}
+.wrap{max-width:800px;margin:0 auto;padding:40px 24px 90px}
+.logo{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+.logo-mark{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,#4a7fff,#7aa2ff);display:flex;align-items:center;justify-content:center;font-size:21px;box-shadow:0 4px 16px rgba(91,140,255,.3)}
+.logo-txt{font-size:18px;font-weight:800}.logo-txt span{color:var(--accent2)}
+.content h1{font-size:30px;font-weight:800;margin:0 0 6px;line-height:1.25}
+.content h2{font-size:20px;font-weight:700;margin:32px 0 10px;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:7px}
+.content h3{font-size:16px;font-weight:700;margin:22px 0 7px;color:var(--accent2)}
+.content p{color:var(--text2);font-size:14.5px;margin:11px 0}
+.content ul,.content ol{color:var(--text2);font-size:14.5px;margin:11px 0;padding-left:24px}
+.content li{margin:6px 0}
+.content strong{color:var(--text)}
+.content a{color:var(--accent2);text-decoration:none}.content a:hover{text-decoration:underline}
+.content code{background:var(--surface2);padding:2px 7px;border-radius:5px;font-size:13px;color:var(--accent2)}
+.updated{color:var(--text3);font-size:13px;margin-bottom:26px}
+.docnav{display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap}
+.docnav-btn{flex:1;min-width:120px;text-align:center;padding:11px 16px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;border:1px solid var(--border);background:var(--surface);color:var(--text2);transition:all .15s}
+.docnav-btn:hover{border-color:var(--accent);color:var(--text)}
+.docnav-btn.active{background:linear-gradient(135deg,#4a7fff,#6b93ff);color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(74,127,255,.35)}
+.highlight{background:rgba(47,213,132,.08);border:1px solid rgba(47,213,132,.25);border-radius:10px;padding:14px 18px;margin:18px 0}
+.highlight p{margin:0;color:var(--text2)}.highlight strong{color:var(--safe)}
+.level{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:16px 0}
+.level .tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--accent2);background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:3px 11px;margin-bottom:9px}
+.yesno{display:flex;gap:10px;margin:12px 0;flex-wrap:wrap}
+.yesno div{flex:1;min-width:220px;border-radius:9px;padding:11px 14px;font-size:13.5px}
+.yesno .sends{background:rgba(240,169,63,.07);border:1px solid rgba(240,169,63,.25)}
+.yesno .never{background:rgba(47,213,132,.07);border:1px solid rgba(47,213,132,.25)}
+.yesno b.s{color:#f0a93f}.yesno b.n{color:var(--safe)}
+footer{text-align:center;color:var(--text3);font-size:12.5px;margin-top:44px;border-top:1px solid var(--border);padding-top:22px}
+footer a{color:var(--accent2);text-decoration:none}
+</style></head><body>
+<div class="wrap">
+  <div class="logo"><div class="logo-mark"><img src="icon128.png" alt="Shomer" style="width:100%;height:100%;object-fit:contain;"></div><div class="logo-txt">Shomer<span> — Email Guardian</span></div></div>
+  <div class="docnav">
+    <a class="docnav-btn" href="index.html">Privacy Policy</a>
+    <a class="docnav-btn" href="terms.html">Terms of Use</a>
+    <a class="docnav-btn active" href="verify.html">Verify It Yourself</a>
+  </div>
+  <div class="content">
+<h1>Verify It Yourself</h1>
+<p class="updated">What Shomer sends — and what it doesn't. Don't take our word for it; check.</p>
+
+<div class="highlight"><p><strong>Shomer's promise:</strong> your email content never leaves your device. This page shows you how to confirm that yourself, from a one-click look to a full network capture.</p></div>
+
+<h2>The short version</h2>
+<p>Shomer analyzes your email <strong>locally, in your browser.</strong> To check whether a <em>link</em> or a <em>file</em> is dangerous, it sends only one of three small things:</p>
+<div class="yesno">
+  <div class="sends"><b class="s">What may be sent</b><br>A stripped link (tokens removed), the sender's domain, or a file's fingerprint (SHA-256 hash) plus its extension.</div>
+  <div class="never"><b class="n">What is never sent</b><br>Your subject, your message text, your inbox, the sender's name, or the file itself.</div>
+</div>
+<p>There are exactly <strong>five</strong> places in the code that talk to the network, and every one sends only the items above.</p>
+
+<h2>Level 1 — See it in 60 seconds</h2>
+<div class="level"><span class="tag">Anyone can do this</span>
+<ol>
+<li>Open Gmail with Shomer installed.</li>
+<li>Press <code>F12</code> to open Developer Tools, and click the <strong>Network</strong> tab.</li>
+<li>Open an email so Shomer analyzes it.</li>
+<li>In the filter box, type <code>onrender</code> (Shomer's backend address).</li>
+<li>Click any request, then open its <strong>Payload</strong> (or <strong>Request</strong>) tab.</li>
+</ol>
+<p><strong>You'll see</strong> a tiny body like <code>{"url":"..."}</code>, <code>{"domain":"..."}</code>, or <code>{"file_hash":"...","filename":".pdf"}</code>. <strong>You won't see</strong> your subject, body, the sender, or the attachment's contents. Search the request for a word you know is in the email — it isn't there.</p>
+</div>
+
+<h2>Level 2 — Prove that nothing leaves (Offline Mode)</h2>
+<div class="level"><span class="tag">The strongest proof</span>
+<ol>
+<li>Open Shomer's <strong>Settings</strong> and turn on <strong>Offline Mode</strong>.</li>
+<li>Open Developer Tools → <strong>Network</strong>, filter for <code>onrender</code>.</li>
+<li>Open several emails, click links, and open attachments.</li>
+</ol>
+<p><strong>You'll see nothing</strong> — zero requests. In Offline Mode, Shomer makes no network calls at all, not even a warm-up ping, and runs entirely on the local engine. With the switch off, the door is simply closed.</p>
+</div>
+
+<h2>Level 3 — Capture everything</h2>
+<div class="level"><span class="tag">For the thorough</span>
+<p>For a complete, tamper-evident record of every byte the extension sends, use an HTTPS-intercepting proxy such as <strong>mitmproxy</strong>, <strong>Fiddler</strong>, or <strong>Charles Proxy</strong>. These sit between your computer and the internet and log all traffic — so you can confirm, and even screenshot for others, exactly what Shomer transmits. This is the same method security researchers use to audit extensions. You'll see the same five request types described above, and nothing else.</p>
+</div>
+
+<h2>Level 4 — Read the code</h2>
+<div class="level"><span class="tag">For developers</span>
+<p>Shomer's analysis logic ships as readable JavaScript. Open <code>background.js</code> and search for <code>fetch(</code> — the function that makes network requests. You'll find exactly five, and can read each payload:</p>
+<ul>
+<li><code>{ url: stripUrlForReputation(url) }</code> — a stripped link</li>
+<li><code>{ domain }</code> — the sender's domain</li>
+<li><code>{ file_hash, filename: safeFileExt(filename) }</code> — a hash and an extension</li>
+</ul>
+<p>The helper <code>stripUrlForReputation()</code> removes the query string and fragment before a link is sent. <code>safeFileExt()</code> returns only the extension, never the filename. Files are read from Gmail's own servers and hashed <strong>on your device</strong> with the browser's built-in <code>crypto.subtle</code> — the bytes are never uploaded.</p>
+</div>
+
+<h2>Questions?</h2>
+<p>If you find anything that doesn't match what's described here, we want to know: <a href="mailto:shomer.support@gmail.com">shomer.support@gmail.com</a>. Privacy claims should be verifiable, and we'd rather be corrected than trusted blindly.</p>
+
+  </div>
+  <footer>
+    Shomer Email Guardian ·
+    <a href="index.html">Privacy Policy</a> ·
+    <a href="terms.html">Terms</a> ·
+    <a href="verify.html">Verify</a> ·
+    <a href="mailto:shomer.support@gmail.com">Support</a>
+  </footer>
+</div>
+</body>
+</html>
